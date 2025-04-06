@@ -22,12 +22,14 @@ public class UserControl {
     public ResponseEntity<LoginUserDTD> login(@RequestBody UserModel user){
         LoginUserDTD respuesta= userService.login(user);
         System.out.println(user.toString());
-        if(respuesta.getUsermodel() != null){
+        if(respuesta.getUserModel() != null){
+            System.out.println(respuesta.getUserModel().toString());
+            System.out.println(respuesta.toString());
             return ResponseEntity.ok(respuesta);
         }else{
-            return ResponseEntity.status(401)
-                    .body(new LoginUserDTD( null,"Invalid credentials"));
+            return ResponseEntity.status(401).body(respuesta);
         }
 
     }
+
 }

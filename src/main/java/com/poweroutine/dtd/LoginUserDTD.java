@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginUserDTD {
-    private UserModel usermodel;
+    private UserModel userModel;
     private String respuesta;
 
 }

@@ -10,9 +10,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*","http://localhost:4200") // Dirección del backend si es el emulador
+                .allowedOrigins("http://localhost:4200","http://localhost:8080") // Dirección del backend si es el emulador
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
+
 }

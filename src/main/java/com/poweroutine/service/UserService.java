@@ -18,7 +18,7 @@ public class UserService {
 
     public LoginUserDTD login(UserModel user) {
         String email = user.getEmail();
-        String nombre = user.getNombre();
+        String name = user.getName();
         String password = user.getPassword();
 
         Optional<UserModel> optionalUser = Optional.empty();
@@ -26,26 +26,30 @@ public class UserService {
 
         if (email != null && !email.isEmpty()) {
             optionalUser = userRepository.findByEmail(email);
-        } else if (nombre != null && !nombre.isEmpty()) {
-            optionalUser = userRepository.findByNombre(nombre);
+        } else if (name != null && !name.isEmpty()) {
+            optionalUser = userRepository.findByName(name);
         }
 
         if (optionalUser.isPresent()) {
             UserModel usuarioBaseDatos = optionalUser.get();
-            loginUserDTD.setUsermodel(usuarioBaseDatos);
 
             if(usuarioBaseDatos.getPassword().equals(password)){
                 loginUserDTD.setRespuesta("usuario correcto");
+                loginUserDTD.setUserModel(usuarioBaseDatos);
+                user.vaciar();
+                usuarioBaseDatos.vaciar();
                 return loginUserDTD;
             }else{
                 loginUserDTD.setRespuesta("Contraseña Incorrecta");
+                user.vaciar();
                 return loginUserDTD;
             }
 
         }else{
             loginUserDTD.setRespuesta("no existe el usuario");
+            user.vaciar();
+            return loginUserDTD;
         }
-        return loginUserDTD;
     }
 
 }
