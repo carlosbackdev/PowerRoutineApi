@@ -46,6 +46,13 @@ public class UserModel {
     @JsonIgnore
     private Set<Rutine> rutinas;
 
+
+    public void vaciar(){
+        name = null;
+        email = null;
+        password = null;
+        daysWeek = null;
+    }
     @Override
     public String toString() {
         return "UserModel{" +
@@ -56,10 +63,17 @@ public class UserModel {
                 ", daysWeek=" + daysWeek +
                 '}';
     }
-    public void vaciar(){
-        name = null;
-        email = null;
-        password = null;
-        daysWeek = null;
+
+    public String toString2() {
+        return "UserModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", daysWeek=" + daysWeek + '\'' +
+                ", rutina=" + rutinas + '\'' +
+                ", idLevelRange=" + idLevelRange + '\'' +
+                ", ObjetiveModel=" + idObjetive +
+                '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.poweroutine.controller;
 
 import com.poweroutine.dtd.LoginUserDTD;
+import com.poweroutine.dtd.RegisterUserDTD;
 import com.poweroutine.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class UserControl {
     @PostMapping("login")
     public ResponseEntity<LoginUserDTD> login(@RequestBody UserModel user){
         LoginUserDTD respuesta= userService.login(user);
-        System.out.println(user.toString());
+
         if(respuesta.getUserModel() != null){
             System.out.println(respuesta.getUserModel().toString());
             System.out.println(respuesta.toString());
@@ -30,6 +31,17 @@ public class UserControl {
             return ResponseEntity.status(401).body(respuesta);
         }
 
+    }
+    @PostMapping("register")
+    public ResponseEntity<String> register(@RequestBody UserModel user){
+        RegisterUserDTD respuesta= userService.register(user);
+        boolean registrado=respuesta.isSucessful();
+        if(registrado){
+            return ResponseEntity.ok(respuesta.getRespuesta());
+        }else{
+
+            return ResponseEntity.status(401).body(respuesta.getRespuesta());
+        }
     }
 
 }
