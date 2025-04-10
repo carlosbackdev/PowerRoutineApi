@@ -33,11 +33,11 @@ public class UserService {
 
         if (optionalUser.isPresent()) {
             UserModel usuarioBaseDatos = optionalUser.get();
+
             if(usuarioBaseDatos.getPassword().equals(password)){
                 loginUserDTD.setRespuesta("usuario correcto");
+                usuarioBaseDatos.setPassword(null);
                 loginUserDTD.setUserModel(usuarioBaseDatos);
-                user.vaciar();
-                usuarioBaseDatos.vaciar();
                 return loginUserDTD;
             }else{
                 loginUserDTD.setRespuesta("Contraseña Incorrecta");
