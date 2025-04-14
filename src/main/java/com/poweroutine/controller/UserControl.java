@@ -43,5 +43,16 @@ public class UserControl {
             return ResponseEntity.status(401).body(respuesta.getRespuesta());
         }
     }
+    @PostMapping("update")
+    public ResponseEntity<LoginUserDTD> update(@RequestBody UserModel user){
+        LoginUserDTD respuesta= userService.update(user);
+        if(respuesta.getUserModel() != null){
+            System.out.println(respuesta.getUserModel().toString());
+            System.out.println(respuesta.toString());
+            return ResponseEntity.ok(respuesta);
+        }else{
+            return ResponseEntity.status(401).body(respuesta);
+        }
+    }
 
 }

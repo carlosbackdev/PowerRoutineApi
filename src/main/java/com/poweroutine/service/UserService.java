@@ -38,6 +38,7 @@ public class UserService {
                 loginUserDTD.setRespuesta("usuario correcto");
                 usuarioBaseDatos.setPassword(null);
                 loginUserDTD.setUserModel(usuarioBaseDatos);
+                System.out.println("Usuario obteinido prueba"+usuarioBaseDatos.toString());
                 return loginUserDTD;
             }else{
                 loginUserDTD.setRespuesta("Contraseña Incorrecta");
@@ -75,5 +76,23 @@ public class UserService {
         }
         return respuesta;
     }
+
+    public LoginUserDTD update(UserModel user){
+        LoginUserDTD respuesta= new LoginUserDTD(null,"usuario no encontrado");
+        Optional<UserModel> usuario = userRepository.findById(user.getId());
+
+        if(usuario.isPresent()){
+            usuario.get().setDaysWeek(user.getDaysWeek());
+            usuario.get().setIdLevelRange(user.getIdLevelRange());
+            usuario.get().setIdObjetive(user.getIdObjetive());
+            respuesta.setUserModel(usuario.get());
+            respuesta.setRespuesta("usuario actualizado correctamente");
+            userRepository.save(usuario.get());
+            return respuesta;
+        }
+
+        return respuesta;
+    }
+
 
 }

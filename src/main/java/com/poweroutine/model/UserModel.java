@@ -23,19 +23,10 @@ public class UserModel {
     private String name;
     private String email;
     private String password;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_level_range")
-    @JsonIgnore
-    private LevelRange idLevelRange;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_objetive")
-    @JsonIgnore
-    private ObjetiveModel idObjetive;
-
-    @Column(name = "days_week")
+    private Integer idLevelRange;
+    private Integer idObjetive;
     private Integer daysWeek;
+
 
     @ManyToMany
     @JoinTable(
@@ -52,7 +43,10 @@ public class UserModel {
         email = null;
         password = null;
         daysWeek = null;
+        idObjetive = null;
+        idLevelRange = null;
     }
+
     @Override
     public String toString() {
         return "UserModel{" +
@@ -60,20 +54,10 @@ public class UserModel {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", idLevelRange=" + idLevelRange +
+                ", idObjetive=" + idObjetive +
                 ", daysWeek=" + daysWeek +
-                '}';
-    }
-
-    public String toString2() {
-        return "UserModel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", daysWeek=" + daysWeek + '\'' +
-                ", rutina=" + rutinas + '\'' +
-                ", idLevelRange=" + idLevelRange + '\'' +
-                ", ObjetiveModel=" + idObjetive +
+                ", rutinas=" + rutinas +
                 '}';
     }
 }
