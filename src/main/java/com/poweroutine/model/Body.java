@@ -17,11 +17,6 @@ public class Body {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-
-    @Column(name = "name", length = 50)
     private String name;
-
-    @OneToMany(mappedBy = "body")
-    private Set<Ejercice> ejercicios = new LinkedHashSet<>();
 
 }

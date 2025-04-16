@@ -14,17 +14,13 @@ public class Ejercice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-
     private String name;
-    @Column(name = "descripcion", length = Integer.MAX_VALUE)
     private String descripcion;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_muscle")
-    private Muscle muscle;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_body")
-    private Body body;
+    @Column(name = "id_body")
+    private  Integer idBody;
+    @Column(name = "id_muscle")
+    private  Integer idMuscle;
+    private String image;
+    private String material;
 
 }

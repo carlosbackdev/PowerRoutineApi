@@ -2,9 +2,6 @@ package com.poweroutine.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -23,10 +20,4 @@ public class LevelRange {
 
     @Column(name = "range_series", length = 10)
     private String rangeSeries;
-
-    @OneToMany(mappedBy = "levelRange")
-    private Set<Rutine> rutines = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "idLevelRange")
-    private Set<UserModel> userModels = new LinkedHashSet<>();
 }

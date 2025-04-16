@@ -1,14 +1,10 @@
 package com.poweroutine.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,7 +15,6 @@ public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String email;
     private String password;
@@ -35,7 +30,7 @@ public class UserModel {
             inverseJoinColumns = @JoinColumn(name = "id_rutina")
     )
     @JsonIgnore
-    private Set<Rutine> rutinas;
+    private Set<RutineModel> rutinas;
 
 
     public void vaciar(){
