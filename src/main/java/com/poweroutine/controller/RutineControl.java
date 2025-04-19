@@ -28,4 +28,15 @@ public class RutineControl {
         return ResponseEntity.status(404).body(rutines);
     }
 
+    @PostMapping("saveRutineUser")
+    public ResponseEntity<String> saveRutineUser(@RequestBody RutineDTD rutine){
+        String respuesta = rutineService.saveRutineUser(rutine);
+        if(respuesta.contains("correctamente")){
+            return ResponseEntity.ok(respuesta);
+        }else{
+            return ResponseEntity.status(401).body(respuesta);
+        }
+
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.poweroutine.dtd;
 
 import com.poweroutine.model.RutineModel;
+import com.poweroutine.model.UserModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,16 @@ import java.util.ArrayList;
 public class RutineDTD {
     private ArrayList<RutineModel> rutinas;
     private String respuesta;
+    private UserModel userModel;
+
+    public RutineDTD(ArrayList<RutineModel> rutinas, String respuesta) {
+        this.rutinas = rutinas;
+        this.respuesta = respuesta;
+    }
+    public RutineDTD(ArrayList<RutineModel> rutinas, UserModel userModel) {
+        this.rutinas = rutinas;
+        this.userModel = userModel;
+    }
 
     public void addRutine(RutineModel rutineModel) {
         if (this.rutinas == null) {
