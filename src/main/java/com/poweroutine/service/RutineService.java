@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RutineService {
@@ -35,14 +36,23 @@ public class RutineService {
     }
 
     public String saveRutineUser(RutineDTD rutine) {
+        System.out.println("rutinas:"+rutine.toString());
         if (rutine == null || rutine.getRutinas() == null || rutine.getUserModel() == null) {
             return "Datos de entrada inválidos";
         }
+
         try {
+            List<RutineUserModel> existingRutines = rutineUserRepository.findByIdUser(rutine.getUserModel().getId());
+            if (!existingRutines.isEmpty()) {
+                // Eliminar rutinas existentes
+                rutineUserRepository.deleteAll(existingRutines);
+                System.out.println("Rutinas existentes eliminadas para el usuario: " + rutine.getUserModel().getId());
+            }
             for (RutineModel rutineModel : rutine.getRutinas()) {
                 RutineUserModel rutineUserModel = new RutineUserModel();
                 rutineUserModel.setIdUser(rutine.getUserModel().getId());
                 rutineUserModel.setRutine(rutineModel);
+                System.out.println("rutina a guardar:"+rutineUserModel.toString());
                 rutineUserRepository.save(rutineUserModel);
             }
             return "Rutina guardada correctamente";

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "rutine", schema = "power_routine")
+@Table(name = "rutine_user", schema = "power_routine")
 public class RutineUserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -32,8 +32,10 @@ public class RutineControl {
     public ResponseEntity<String> saveRutineUser(@RequestBody RutineDTD rutine){
         String respuesta = rutineService.saveRutineUser(rutine);
         if(respuesta.contains("correctamente")){
+            System.out.println(respuesta);
             return ResponseEntity.ok(respuesta);
         }else{
+            System.out.println(respuesta);
             return ResponseEntity.status(401).body(respuesta);
         }
 
