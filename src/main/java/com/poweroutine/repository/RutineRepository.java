@@ -12,5 +12,4 @@ public interface RutineRepository extends JpaRepository<RutineModel, Long> {
 
      @Query("SELECT r FROM RutineModel r WHERE r.dayweek LIKE %:dayweek%")
      List<RutineModel> findByDayweekContaining(@Param("dayweek") String dayweek);
-
 }

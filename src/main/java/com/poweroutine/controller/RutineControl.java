@@ -1,6 +1,7 @@
 package com.poweroutine.controller;
 
 import com.poweroutine.dtd.RutineDTD;
+import com.poweroutine.dtd.RutineUserDTD;
 import com.poweroutine.model.UserModel;
 import com.poweroutine.service.RutineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,17 @@ public class RutineControl {
             System.out.println(respuesta);
             return ResponseEntity.status(401).body(respuesta);
         }
+    }
 
+    @PostMapping("getRutineUser")
+    public ResponseEntity<RutineUserDTD> getRutineUser(@RequestBody UserModel user){
+        RutineUserDTD rutines = rutineService.getRutineUser(user);
+        if(rutines.getRespuesta().contains("encontradas")) {
+            System.out.println(rutines.getRutinas());
+            return ResponseEntity.ok(rutines);
+        }else{
+            return ResponseEntity.status(404).body(rutines);
+        }
     }
 
 }

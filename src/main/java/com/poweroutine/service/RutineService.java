@@ -1,8 +1,10 @@
 package com.poweroutine.service;
 
 import com.poweroutine.dtd.RutineDTD;
+import com.poweroutine.dtd.RutineUserDTD;
 import com.poweroutine.model.RutineModel;
 import com.poweroutine.model.RutineUserModel;
+import com.poweroutine.model.UserModel;
 import com.poweroutine.repository.RutineRepository;
 import com.poweroutine.repository.RutineUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,25 @@ public class RutineService {
             return "Error al guardar la rutina: " + e.getMessage();
         }
 
+    }
+
+    public RutineUserDTD getRutineUser(UserModel user) {
+        RutineUserDTD rutineUserDTD = new RutineUserDTD();
+
+        try{
+            List<RutineUserModel> rutineUserModelFound = rutineUserRepository.findByIdUser(user.getId());
+            if(!rutineUserModelFound.isEmpty()) {
+                rutineUserDTD.setRutinas(rutineUserModelFound);
+                rutineUserDTD.setRespuesta("Rutinas encontradas para el usuario: " + user.getName());
+                return rutineUserDTD;
+            } else {
+                rutineUserDTD.setRespuesta("Error: No se encontraron rutinas para el usuario: " + user.getId());
+                return rutineUserDTD;
+            }
+        }catch (Exception e){
+            rutineUserDTD.setRespuesta("Error: No se encontraron rutinas para el usuario: " + user.getId());
+            return rutineUserDTD;
+        }
     }
 
 }
