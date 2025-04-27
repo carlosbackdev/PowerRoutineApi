@@ -83,4 +83,37 @@ public class RutineService {
         }
     }
 
+    public String rutineUserUpdate(RutineUserModel rutine) {
+        if (rutine == null || rutine.getId() == null) {
+            return "Error: Rutina inválida o ID no proporcionado";
+        }
+
+        try {
+            Optional<RutineUserModel> existingRutine = rutineUserRepository.findById(Long.valueOf(rutine.getId()));
+            if (existingRutine.isPresent()) {
+                RutineUserModel rutineToUpdate = existingRutine.get();
+
+                // Actualizar los campos necesarios
+                rutineToUpdate.setName(rutine.getName());
+                rutineToUpdate.setIdRutine(rutine.getIdRutine());
+                rutineToUpdate.setIdUser(rutine.getIdUser());
+                rutineToUpdate.setIdBody(rutine.getIdBody());
+                rutineToUpdate.setIdEjercices(rutine.getIdEjercices());
+                rutineToUpdate.setImage(rutine.getImage());
+                rutineToUpdate.setRutineIncompatible(rutine.getRutineIncompatible());
+                rutineToUpdate.setType(rutine.getType());
+                rutineToUpdate.setComplement(rutine.getComplement());
+                rutineToUpdate.setMuscle_principal(rutine.getMuscle_principal());
+                rutineToUpdate.setDayweek(rutine.getDayweek());
+
+                // Guardar los cambios
+                rutineUserRepository.save(rutineToUpdate);
+                return "Rutina actualizada correctamente";
+            } else {
+                return "Error: Rutina no encontrada con el ID proporcionado";
+            }
+        } catch (Exception e) {
+            return "Error al actualizar la rutina: " + e.getMessage();
+        }
+    }
 }

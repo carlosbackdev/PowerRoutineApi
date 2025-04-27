@@ -2,6 +2,8 @@ package com.poweroutine.controller;
 
 import com.poweroutine.dtd.RutineDTD;
 import com.poweroutine.dtd.RutineUserDTD;
+import com.poweroutine.model.RutineModel;
+import com.poweroutine.model.RutineUserModel;
 import com.poweroutine.model.UserModel;
 import com.poweroutine.service.RutineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,18 @@ public class RutineControl {
             return ResponseEntity.ok(rutines);
         }else{
             return ResponseEntity.status(404).body(rutines);
+        }
+    }
+
+    @PostMapping("updateRutineUser")
+    public ResponseEntity<String> updateRutineUser(@RequestBody RutineUserModel rutine){
+        String respuesta = rutineService.rutineUserUpdate(rutine);
+        if(respuesta.contains("actualizada")){
+            System.out.println(respuesta);
+            return ResponseEntity.ok(respuesta);
+        }else{
+            System.out.println(respuesta);
+            return ResponseEntity.status(401).body(respuesta);
         }
     }
 
