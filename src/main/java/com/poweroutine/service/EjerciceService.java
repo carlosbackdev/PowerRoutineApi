@@ -6,8 +6,10 @@ import com.poweroutine.model.EjerciceModel;
 import com.poweroutine.model.RutineModel;
 import com.poweroutine.repository.EjerciceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +33,22 @@ public class EjerciceService {
                 return ejerciciosData;
             }
             ejerciciosData.setRespuesta("Ejercicios encontrados");
+            return ejerciciosData;
+        }catch (Exception e){
+            ejerciciosData.setRespuesta("Error al obtener los ejercicios");
+            System.out.println("Error al obtener los ejercicios: " + e.getMessage());
+        }
+        return ejerciciosData;
+    }
+
+    public EjerciceDTD getAllEjercices() {
+        EjerciceDTD ejerciciosData = new EjerciceDTD();
+        try{
+            ejerciciosData.setEjercices(new ArrayList<>(ejerciceRepository.findAll()));
+            if(!ejerciciosData.getEjercices().isEmpty()){
+                ejerciciosData.setRespuesta("Todos los ejercicios encontrados");
+                return ejerciciosData;
+            }
             return ejerciciosData;
         }catch (Exception e){
             ejerciciosData.setRespuesta("Error al obtener los ejercicios");

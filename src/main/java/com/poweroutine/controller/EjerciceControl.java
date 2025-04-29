@@ -6,10 +6,7 @@ import com.poweroutine.model.RutineModel;
 import com.poweroutine.service.EjerciceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +28,16 @@ public class EjerciceControl {
             }
         }
         EjerciceDTD ejerciciosData = ejerciceService.getEjercices(idEjercices);
+        if(ejerciciosData.getRespuesta().contains("Ejercicios encontrados")) {
+            System.out.println(ejerciciosData.getEjercices());
+            return ResponseEntity.ok(ejerciciosData);
+        }
+        return ResponseEntity.status(404).body(ejerciciosData);
+
+    }
+    @GetMapping("getAllEjercices")
+    public ResponseEntity<EjerciceDTD> getAllEjercice(){
+        EjerciceDTD ejerciciosData = ejerciceService.getAllEjercices();
         if(ejerciciosData.getRespuesta().contains("Ejercicios encontrados")) {
             System.out.println(ejerciciosData.getEjercices());
             return ResponseEntity.ok(ejerciciosData);
