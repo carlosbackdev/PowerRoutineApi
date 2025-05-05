@@ -41,5 +41,4 @@ public class RutineModel {
 
     private String dayweek;
 
-
 }

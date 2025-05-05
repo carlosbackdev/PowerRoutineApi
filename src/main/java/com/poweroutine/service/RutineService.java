@@ -105,7 +105,9 @@ public class RutineService {
                 rutineToUpdate.setComplement(rutine.getComplement());
                 rutineToUpdate.setMuscle_principal(rutine.getMuscle_principal());
                 rutineToUpdate.setDayweek(rutine.getDayweek());
-
+                if (rutine.isCompleted()){
+                    rutineToUpdate.setCompleted(rutine.isCompleted());
+                }
                 // Guardar los cambios
                 rutineUserRepository.save(rutineToUpdate);
                 return "Rutina actualizada correctamente";

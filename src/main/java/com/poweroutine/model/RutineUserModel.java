@@ -58,5 +58,6 @@ public class RutineUserModel {
         muscle_principal = rutine.getMuscle_principal();
         dayweek = rutine.getDayweek();
     }
+    private boolean completed;
 
 }
