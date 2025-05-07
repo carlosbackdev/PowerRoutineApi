@@ -19,5 +19,5 @@ public class EjerciceModel {
     private  Integer idMuscle;
     private String image;
     private String material;
-
+    private boolean basic;
 }

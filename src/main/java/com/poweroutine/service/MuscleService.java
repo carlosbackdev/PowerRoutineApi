@@ -17,10 +17,7 @@ public class MuscleService {
     MuscleRepository muscleRepository;
 
     public MuscleDTD getAllMuscles(){
-        List<MuscleModel> muscles = new ArrayList<>();
-        muscleRepository.findAll().forEach(muscle -> {
-            muscles.add(muscle);
-        });
+        List<MuscleModel> muscles =muscleRepository.findAll();
         if(muscles.isEmpty()){
             muscleDTD.setRespuesta("No se encontraron musculos");
             return muscleDTD;

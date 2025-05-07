@@ -16,11 +16,12 @@ import java.util.Optional;
 @Service
 public class EjerciceService {
 
+    private EjerciceDTD ejerciciosData=new EjerciceDTD();
+
     @Autowired
     EjerciceRepository ejerciceRepository;
 
     public EjerciceDTD getEjercices(List<Long> idEjercices) {
-         EjerciceDTD ejerciciosData = new EjerciceDTD();
         try{
             for (Long id : idEjercices) {
                 Optional<EjerciceModel> ejercicio = ejerciceRepository.findById(id);
@@ -42,18 +43,13 @@ public class EjerciceService {
     }
 
     public EjerciceDTD getAllEjercices() {
-        EjerciceDTD ejerciciosData = new EjerciceDTD();
-        try{
-            ejerciciosData.setEjercices(new ArrayList<>(ejerciceRepository.findAll()));
-            if(!ejerciciosData.getEjercices().isEmpty()){
-                ejerciciosData.setRespuesta("Todos los ejercicios encontrados");
-                return ejerciciosData;
-            }
+        List<EjerciceModel> ejercicios = ejerciceRepository.findAll();
+        if(ejercicios.isEmpty()){
+            ejerciciosData.setRespuesta("No se encontraron ejercicios");
             return ejerciciosData;
-        }catch (Exception e){
-            ejerciciosData.setRespuesta("Error al obtener los ejercicios");
-            System.out.println("Error al obtener los ejercicios: " + e.getMessage());
         }
+        ejerciciosData.setEjercices(new ArrayList<>(ejercicios));
+        ejerciciosData.setRespuesta("Ejercicios encontrados");
         return ejerciciosData;
     }
 
