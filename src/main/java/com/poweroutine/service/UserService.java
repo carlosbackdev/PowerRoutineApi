@@ -85,6 +85,8 @@ public class UserService {
             usuario.get().setDaysWeek(user.getDaysWeek());
             usuario.get().setIdLevelRange(user.getIdLevelRange());
             usuario.get().setIdObjetive(user.getIdObjetive());
+            usuario.get().setName(user.getName());
+            usuario.get().setEmail(user.getEmail());
             respuesta.setUserModel(usuario.get());
             respuesta.setRespuesta("usuario actualizado correctamente");
             userRepository.save(usuario.get());
@@ -93,6 +95,17 @@ public class UserService {
 
         return respuesta;
     }
+
+    public boolean deleteUser(UserModel user){
+        Optional<UserModel> usuario = userRepository.findById(user.getId());
+        if(usuario.isPresent()){
+            userRepository.delete(usuario.get());
+            return true;
+        }
+        return false;
+    }
+
+
 
 
 }

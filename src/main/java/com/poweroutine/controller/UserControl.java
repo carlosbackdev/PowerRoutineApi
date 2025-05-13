@@ -24,8 +24,6 @@ public class UserControl {
         LoginUserDTD respuesta= userService.login(user);
 
         if(respuesta.getUserModel() != null){
-            System.out.println(respuesta.getUserModel().toString());
-            System.out.println(respuesta.toString());
             return ResponseEntity.ok(respuesta);
         }else{
             return ResponseEntity.status(401).body(respuesta);
@@ -45,14 +43,21 @@ public class UserControl {
     }
     @PostMapping("update")
     public ResponseEntity<LoginUserDTD> update(@RequestBody UserModel user){
+        System.out.println("usuario a cambiar:"+user.toString());
         LoginUserDTD respuesta= userService.update(user);
         if(respuesta.getUserModel() != null){
-            System.out.println(respuesta.getUserModel().toString());
-            System.out.println(respuesta.toString());
             return ResponseEntity.ok(respuesta);
         }else{
             return ResponseEntity.status(401).body(respuesta);
         }
+    }
+
+    @PostMapping("delete")
+    public boolean delete(@RequestBody UserModel user){
+        if(userService.deleteUser(user)){
+            return true;
+        }
+        return false;
     }
 
 }
