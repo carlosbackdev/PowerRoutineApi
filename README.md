@@ -15,6 +15,8 @@ PowerRoutineApi es una API REST desarrollada en Java con Spring Boot, diseñada 
   - `descripcion`: detalles adicionales (según el modelo).
   - Otros campos según la entidad.
 
+#### 🏗️ Desplegada en Contenedor Docker
+
 ## 🏛️ Arquitectura en Capas
 
 La API está organizada siguiendo el patrón de arquitectura en capas, típico de aplicaciones Spring Boot:
